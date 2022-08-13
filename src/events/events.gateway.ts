@@ -7,10 +7,9 @@ import {
   WsResponse,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
-import { from, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import moment from 'moment';
 
-let count: number = 0;
+let count = 0;
 
 @WebSocketGateway({
   cors: {
@@ -21,26 +20,35 @@ export class EventsGateway {
   @WebSocketServer() server: Server;
 
   @SubscribeMessage('connection')
-  newUser(@MessageBody() data: any): string {
+  newUser(@MessageBody() data: any, @ConnectedSocket() socket: Socket): string {
     console.log('New user connected!');
-    data = 'Hi new user!';
-    return data;
-  }
-
-  @SubscribeMessage('disconnection')
-  userDisconnect(@MessageBody() data: any): void {
-    console.log('User left!');
+    socket.broadcast.emit('newUser');
+    return (data = 'Hi new user!');
   }
 
   @SubscribeMessage('increaseNum')
   setIncreNum(@MessageBody() data: any): void {
     count += 1;
+    console.log(`'Increase count' ${count}`);
     this.server.emit('msgToClient', count);
   }
 
   @SubscribeMessage('decreaseNum')
   setDecreNum(@MessageBody() data: any): void {
     count -= 1;
+    console.log(`'Decrease count' ${count}`);
     this.server.emit('msgToClient', count);
+  }
+
+  @SubscribeMessage('newMessage')
+  newMessage(
+    @MessageBody() data: any,
+    @ConnectedSocket() socket: Socket,
+  ): string {
+    console.log(data);
+    data = { ...data, createAt: Date.now() };
+    this.server.emit('messageToClient', data);
+    const res = 'The message has been sent';
+    return res;
   }
 }

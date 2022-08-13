@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Message Chat Realtime - Dcoder</title>
 </head>
 
@@ -17,47 +18,19 @@
     <button id="btnIncre">Increase</button>
     <button id="btnDecre">Decrease</button>
 
-    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"
-        integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs"
-        crossorigin="anonymous"></script>
-    <script>
-        //Yeu cau server ket noi voi client
-        const socket = io('http://localhost:3002');
-        socket.on('connect', function (data) {
-            console.log('Connected at client');
+    <h3>Type message here</h3>
+    <form id="message-form">
+        <label>User Name</label>
+        <input name="txtUserName" id="txtUserName" type="text">
+        <label>Comment</label>
+        <input name="txtMessage" id="txtMessage" type="text">
+        <button id="btnMessage" type="submit">Send</button>
+    </form>
+    <ol id="messages"></ol>
 
-            socket.emit('connection', (res) => {
-                console.log(res);
-            });//Send connection event from client to server
-        });
-        socket.on('events', (res) => {
-            console.log('event', res);
-            // socket.emit('sendCount', response =>
-            //     console.log('sendCount:', response));
-        })
-        socket.on('exception', function (data) {
-            console.log('event', data);
-        });
-        socket.on('disconnect', function (data) {
-            console.log('Disconnected');
-
-            socket.emit('disconnection');//Send disconnection event from client to server
-        });
-
-        let btnIncre = document.getElementById('btnIncre');
-        btnIncre.addEventListener('click', () => {
-            socket.emit('increaseNum');
-        })
-
-        let btnDecre = document.getElementById('btnDecre');
-        btnDecre.addEventListener('click', () => {
-            socket.emit('decreaseNum');
-        })
-
-        socket.on('msgToClient', (data) => {
-            document.getElementById('txtCount').innerHTML = data;
-        })
-    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/moment.js"></script>
 </body>
 
 </html>
