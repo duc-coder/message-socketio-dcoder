@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Chat Realtime - Dcoder</title>
+</head>
+
+<body>
+    <h1>Hello Socket IO!</h1>
+    <p>
+        The count is:
+        <span id="txtCount">0</span>
+    </p>
+    <button id="btnIncre">Increase</button>
+    <button id="btnDecre">Decrease</button>
+
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"
+        integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs"
+        crossorigin="anonymous"></script>
+    <script>
+        //Yeu cau server ket noi voi client
+        const socket = io('http://localhost:3002');
+        socket.on('connect', function (data) {
+            console.log('Connected at client');
+
+            socket.emit('connection', (res) => {
+                console.log(res);
+            });//Send connection event from client to server
+        });
+        socket.on('events', (res) => {
+            console.log('event', res);
+            // socket.emit('sendCount', response =>
+            //     console.log('sendCount:', response));
+        })
+        socket.on('exception', function (data) {
+            console.log('event', data);
+        });
+        socket.on('disconnect', function (data) {
+            console.log('Disconnected');
+
+            socket.emit('disconnection');//Send disconnection event from client to server
+        });
+
+        let btnIncre = document.getElementById('btnIncre');
+        btnIncre.addEventListener('click', () => {
+            socket.emit('increaseNum');
+        })
+
+        let btnDecre = document.getElementById('btnDecre');
+        btnDecre.addEventListener('click', () => {
+            socket.emit('decreaseNum');
+        })
+
+        socket.on('msgToClient', (data) => {
+            document.getElementById('txtCount').innerHTML = data;
+        })
+    </script>
+</body>
+
+</html>
