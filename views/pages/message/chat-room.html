@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Message Chat Realtime - Dcoder</title>
+</head>
+
+<body>
+    <h1>Hello Socket IO!</h1>
+    <p>
+        The count is:
+        <span id="txtCount">0</span>
+    </p>
+    <button id="btnIncre">Increase</button>
+    <button id="btnDecre">Decrease</button>
+
+    <h3>Type message here</h3>
+    <form id="message-form">
+        <label>User Name</label>
+        <input name="txtUserName" id="txtUserName" type="text">
+        <label>Comment</label>
+        <input name="txtMessage" id="txtMessage" type="text">
+        <button id="btnMessage" type="submit">Send</button>
+    </form>
+    <ol id="messages"></ol>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="/js/moment.js"></script>
+</body>
+
+</html>
