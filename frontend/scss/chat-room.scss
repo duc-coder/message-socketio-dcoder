@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.background {
+    @apply w-full h-screen;
+}
+
+.message-field {
+    @apply w-full h-5/6;
+}
+
+.message-form-field {
+    @apply w-full h-1/6;
+    @apply bg-gray-200;
+    @apply flex justify-center items-center;
+}
+
+#message-form {
+    @apply w-full;
+    @apply flex justify-between;
+}
+
+.btn-submit {
+    @apply bg-blue-600 text-white;
+    @apply px-2 py-1;
+}
+#txtMessage {
+    @apply h-9 w-7/12;
+}

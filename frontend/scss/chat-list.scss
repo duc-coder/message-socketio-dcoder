@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    @apply bg-blue-500;
+}
+
+.bacground {
+    @apply w-full h-screen;
+    @apply flex justify-center items-center;
+}
+
+.header-text {
+    @apply mb-2;
+    @apply text-black text-center text-3xl font-bold;
+}
+
+.form {
+    @apply w-10/12 p-5;
+    @apply bg-gray-300;
+    @apply rounded-xl;
+    @apply flex flex-wrap justify-center items-center;
+}
+
+label {
+    @apply w-full;
+    @apply font-bold text-center text-lg;
+    @apply my-2;
+}
+
+input {
+    @apply w-11/12 h-10 rounded-lg;
+    @apply my-2;
+}
+
+.btn-submit {
+    @apply bg-blue-600 text-white;
+    @apply rounded px-5 py-2 mt-2;
+}
+
+.form-field {
+    @apply w-full;
+    @apply flex flex-wrap justify-center items-center;
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/dist/css/chat-list.css">
+    <title>{{title}}</title>
+</head>
+
+<body class="bacground">
+    <form class="form" action="{{chatRoomPath}}">
+        <h1 class="header-text">Select your chat room</h1>
+        <div class="form-field">
+            <label for="name">Your user name</label>
+            <input type="text" autofocus name="name" id="name">
+        </div>
+        <div class="form-field">
+            <label for="room">Room name</label>
+            <input type="text" name="room" id="room">
+        </div>
+        <div class="form-field">
+            <button class="btn-submit" type="submit">Submit</button>
+        </div>
+    </form>
+</body>
+
+</html>
